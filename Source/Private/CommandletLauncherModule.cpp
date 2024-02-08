@@ -7,6 +7,7 @@
 #include "ToolMenus.h"
 #include "Interfaces/IPluginManager.h"
 #include "UObject/Object.h"
+#include "CommandletLauncherEditor.h"
 
 static const FName CommandletLauncherName("CommandletLauncher");
 
@@ -59,12 +60,15 @@ void FCommandletLauncherModule::PluginButtonClicked()
     //   }
     //}
 
-    if (!CommandletLauncher.IsValid())
-    {
-        CommandletLauncher = MakeShared<FCommandletLauncher>();
-    }
+    //if (!CommandletLauncher.IsValid())
+    //{
+    //    CommandletLauncher = MakeShared<FCommandletLauncher>();
+    //}
 
-    CommandletLauncher->CreateNewCommandletProcess(TEXT("CommandletName"), TEXT("-CommandletArgs"));
+    //CommandletLauncher->CreateNewCommandletProcess(TEXT("CommandletName"), TEXT("-CommandletArgs"));
+
+    TSharedRef<FCommandletLauncherEditor> Editor = MakeShared<FCommandletLauncherEditor>();
+    Editor->InitEditor(EToolkitMode::Standalone, nullptr);
 }
 
 void FCommandletLauncherModule::RegisterMenus()
