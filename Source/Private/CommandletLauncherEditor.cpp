@@ -56,8 +56,6 @@ void FCommandletLauncherEditor::UnregisterTabSpawners(const TSharedRef<class FTa
 
 void FCommandletLauncherEditor::InitEditor(const EToolkitMode::Type Mode, const TSharedPtr<class IToolkitHost>& InitToolkitHost)
 {
-    CreateInternalWidgets();
-
     const TSharedRef<FTabManager::FLayout> StandaloneDefaultLayout = FTabManager::NewLayout("Standalone_CommandletLauncher_Layout_v1")
         ->AddArea
         (
@@ -90,7 +88,6 @@ TSharedRef<SDockTab> FCommandletLauncherEditor::SpawnTab(const FSpawnTabArgs& Ar
             [
                 SNew(SListView<TSharedPtr<FName>>)
                 .ListItemsSource(&CommandletNames)
-            .OnGenerateRow(this, &FCommandletLauncherEditor::GenerateItem)
             ]
         ];
 }
