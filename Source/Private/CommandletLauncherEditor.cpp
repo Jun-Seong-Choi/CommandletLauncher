@@ -79,14 +79,13 @@ TSharedRef<SDockTab> FCommandletLauncherEditor::SpawnTab(const FSpawnTabArgs& Ar
     return SNew(SDockTab)
         .Label(LOCTEXT("CommandletLauncherEditor", "CommandletLauncher"))
         [
-            SNew(SBox)
-            [
-                EditorWidget.ToSharedRef()
-            ]
+            EditorWidget.ToSharedRef()            
         ];
 }
 
 void FCommandletLauncherEditor::CreateInternalWidgets()
 {
+    EditorWidget = SNew(SCommandletLauncherEditorWidget)
+        .Editor(SharedThis(this));
 }
 #undef LOCTEXT_NAMESPACE
