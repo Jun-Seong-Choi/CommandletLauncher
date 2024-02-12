@@ -67,6 +67,8 @@ void FCommandletLauncherEditor::InitEditor(const EToolkitMode::Type Mode, const 
             )
         );
 
+    CreateInternalWidgets();
+    
     const bool bCreateDefaultStandaloneMenu = true;
     const bool bCreateDefaultToolbar = true;
     FAssetEditorToolkit::InitAssetEditor(Mode, InitToolkitHost, CommandletLauncherEditorTabName, StandaloneDefaultLayout, bCreateDefaultStandaloneMenu, bCreateDefaultToolbar, nullptr);
@@ -74,22 +76,17 @@ void FCommandletLauncherEditor::InitEditor(const EToolkitMode::Type Mode, const 
 
 TSharedRef<SDockTab> FCommandletLauncherEditor::SpawnTab(const FSpawnTabArgs& Args)
 {
-    TSharedPtr<FCommandletLauncherEditor> CommandletLauncherEditorPtr = SharedThis(this);
-
-    CommandletNames.Add(MakeShareable(new FName("Test-Name")));
-
     return SNew(SDockTab)
         .Label(LOCTEXT("CommandletLauncherEditor", "CommandletLauncher"))
         [
-            SNew(SVerticalBox)
-            + SVerticalBox::Slot()
-            .AutoHeight()
-            .MaxHeight(400.0f)
+            SNew(SBox)
             [
-                SNew(SListView<TSharedPtr<FName>>)
-                .ListItemsSource(&CommandletNames)
+                EditorWidget.ToSharedRef()
             ]
         ];
 }
 
+void FCommandletLauncherEditor::CreateInternalWidgets()
+{
+}
 #undef LOCTEXT_NAMESPACE
