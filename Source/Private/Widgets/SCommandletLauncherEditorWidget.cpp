@@ -1,6 +1,6 @@
 #include "Widgets/SCommandletLauncherEditorWidget.h"
 
-void SCommandletLauncherEditorWidget::Construct(const FArguments& InArgs, TWeakPtr<FCommandletLauncherEditor> InEditorPtr)
+void SCommandletLauncherEditorWidget::Construct(const FArguments& InArgs)
 {
-	EditorPtr = InEditorPtr;
+	EditorPtr = InArgs._Editor;
 }
