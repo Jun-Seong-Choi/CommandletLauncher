@@ -31,7 +31,9 @@ private:
 
 	TSharedRef<SDockTab> SpawnTab(const FSpawnTabArgs& Args);
 
+	void CreateInternalWidgets();
+
 private:
 
-	TArray<TSharedPtr<FName>> CommandletNames;
+	TSharedPtr<SCommandletLauncherEditorWidget> EditorWidget;
 };
