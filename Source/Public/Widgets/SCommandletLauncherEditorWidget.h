@@ -9,12 +9,11 @@ class FCommandletLauncherEditor;
 class SCommandletLauncherEditorWidget : public SCompoundWidget
 {
 public:
-	SLATE_BEGIN_ARGS(SCommandletLauncherEditorWidget)
-	{
-	}
+	SLATE_BEGIN_ARGS(SCommandletLauncherEditorWidget) {}
+		SLATE_ARGUMENT(TWeakPtr<FCommandletLauncherEditor>, Editor)
 	SLATE_END_ARGS()
 
-	void Construct(const FArguments& InArgs, TWeakPtr<FCommandletLauncherEditor> InEditorPtr);
+	void Construct(const FArguments& InArgs);
 
 private:
 
