@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Framework/Docking/TabManager.h"
+#include "Widgets/SCommandletLauncherEditorWidget.h"
 
 static const FName CommandletLauncherEditorTabName("CommandletLauncherEditor");
 
