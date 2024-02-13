@@ -1,6 +1,5 @@
 #include "CommandletLauncherEditor.h"
 #include "Framework/Docking/TabManager.h"
-#include "Widgets/Input/STextComboBox.h"
 
 #define LOCTEXT_NAMESPACE "CommandletLauncherEditor"
 
