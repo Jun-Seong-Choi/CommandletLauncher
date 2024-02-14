@@ -45,7 +45,6 @@ public:
     }
 
 public:
-
     //~ Begin FRunnable Interface
 
     virtual bool Init() override;
@@ -56,7 +55,6 @@ public:
     //~ End FRunnable Interface
 
 public:
-
     void CreateNewCommandletProcess(const FString& InName, const FString& InArgs);
 
     void OnCommandletStarted(const FString& InName);
@@ -81,13 +79,10 @@ public:
     }
 
 private:
-
     void Processing();
-
     void OutputMessage(const FString& InMessage);
 
 private:
-
     ECommandletLauncherStatus::Type Status = ECommandletLauncherStatus::Waiting;
 
     TQueue<TSharedPtr<FCommandletLauncherProcess>> Commandlets;
