@@ -13,9 +13,11 @@ public:
 	SLATE_END_ARGS()
 
 	void Construct(const FArguments& InArgs);
+	void SetCommandlets();
 
 private:
-
 	TWeakPtr<FCommandletLauncherEditor> EditorPtr;
-};
 
+	TArray<TSharedPtr<FString>> Commandlets;
+	TSharedPtr<FString> SelectedCommandlet;
+};
