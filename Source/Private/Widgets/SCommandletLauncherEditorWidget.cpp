@@ -19,8 +19,8 @@ void SCommandletLauncherEditorWidget::Construct(const FArguments& InArgs)
 		.Padding(5.0f)
 		[
 			SNew(STextBlock)
-				.Font(FAppStyle::GetFontStyle(TEXT("SmallFont")))
-				.Text(LOCTEXT("Commandlet", "Commandlet"))
+			.Font(FAppStyle::GetFontStyle(TEXT("SmallFont")))
+			.Text(LOCTEXT("Commandlet", "Commandlet"))
 		]
 		+SVerticalBox::Slot()
 		.AutoHeight()
