@@ -8,7 +8,6 @@ static const FName CommandletLauncherEditorTabName("CommandletLauncherEditor");
 class FCommandletLauncherEditor : public FAssetEditorToolkit
 {
 public:
-
 	FCommandletLauncherEditor();
 	~FCommandletLauncherEditor();
 
@@ -25,16 +24,12 @@ public:
 	void InitEditor(const EToolkitMode::Type Mode, const TSharedPtr<class IToolkitHost>& InitToolkitHost);
 
 public:
-
 	static const FName TabID;
 
 private:
-
 	TSharedRef<SDockTab> SpawnTab(const FSpawnTabArgs& Args);
-
 	void CreateInternalWidgets();
 
 private:
-
 	TSharedPtr<SCommandletLauncherEditorWidget> EditorWidget;
 };
