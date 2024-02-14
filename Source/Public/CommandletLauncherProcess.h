@@ -25,7 +25,6 @@ DECLARE_MULTICAST_DELEGATE_OneParam(FOnCommandletProcessCompletedDelegate, const
 class FCommandletLauncherProcess : public FRunnable
 {
 public:
-
     FCommandletLauncherProcess(const FString& InName, const FString InArgs, void* InReadPipe, void* InWritePipe, FProcHandle& InProcessHandle, class FCommandletLauncher* InLauncher) :
         Name(InName),
         Args(InArgs),
@@ -49,7 +48,6 @@ public:
     }
 
 public:
-
     //~ Begin FRunnable Interface
 
     virtual bool Init() override;
@@ -60,7 +58,6 @@ public:
     //~ End FRunnable Interface
 
 public:
-
     bool IsValid();
 
     void Execute();
@@ -96,15 +93,11 @@ public:
     }
 
 private:
-
     bool IsAlive();
-
     void Processing();
-
     void HandleMessageReceived(const FString& InMessage);
 
 private:
-
     FString Name;
     FString Args;
 
