@@ -28,7 +28,7 @@ void SCommandletLauncherEditorWidget::Construct(const FArguments& InArgs)
 		.Padding(5.0f)
 		[
 			SNew(SSearchableComboBox)
-			.ToolTipText(LOCTEXT("SourceChainOptionsToolTip", "Select source chain to map to this target chain."))
+			.ToolTipText(LOCTEXT("CommandletToolTip", "Select the commandlet to run."))
 			.OptionsSource(&Commandlets)
 			.OnGenerateWidget_Lambda([](TSharedPtr<FString> InItem)
 			{
