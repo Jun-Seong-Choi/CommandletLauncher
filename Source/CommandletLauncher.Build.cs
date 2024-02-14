@@ -43,6 +43,7 @@ public class CommandletLauncher : ModuleRules
 				"Engine",
 				"Slate",
 				"SlateCore",
+				"ToolWidgets"
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);
