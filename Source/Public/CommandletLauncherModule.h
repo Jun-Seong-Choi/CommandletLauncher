@@ -12,7 +12,6 @@ class FMenuBuilder;
 class FCommandletLauncherModule : public IModuleInterface
 {
 public:
-
 	/** IModuleInterface implementation */
 	virtual void StartupModule() override;
 	virtual void ShutdownModule() override;
@@ -21,11 +20,9 @@ public:
 	void PluginButtonClicked();
 
 private:
-
 	void RegisterMenus();
 
 private:
 	TSharedPtr<class FUICommandList> PluginCommands;
-
 	TSharedPtr<class FCommandletLauncher> CommandletLauncher = nullptr;
 };
