@@ -15,9 +15,16 @@ public:
 	void Construct(const FArguments& InArgs);
 	void SetCommandlets();
 
+	void OnCommandletCommitted(const FText& InNewText, ETextCommit::Type InCommitType);
+
 private:
+
 	TWeakPtr<FCommandletLauncherEditor> EditorPtr;
 
+	TSharedPtr<SEditableTextBox> EditableText;
+
 	TArray<TSharedPtr<FString>> Commandlets;
+	TArray<TSharedPtr<FString>> Arguments;
 	TSharedPtr<FString> SelectedCommandlet;
+	TSharedPtr<FString> SelectedArgument;
 };
