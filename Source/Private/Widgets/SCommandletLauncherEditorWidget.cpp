@@ -1,6 +1,7 @@
 #include "Widgets/SCommandletLauncherEditorWidget.h"
 #include "Commandlets/Commandlet.h"
 #include "SSearchableComboBox.h"
+#include "Widgets/Input/STextComboBox.h"
 	
 #define LOCTEXT_NAMESPACE "CommandletLauncherEditorWidget"
 
