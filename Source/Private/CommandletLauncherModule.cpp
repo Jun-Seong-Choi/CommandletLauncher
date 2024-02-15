@@ -50,23 +50,6 @@ void FCommandletLauncherModule::PluginButtonClicked()
 {
     // Put your "OnButtonClicked" stuff here
 
-    //FString PluginContentDir;
-    //for (TSharedRef<IPlugin> Plugin : IPluginManager::Get().GetEnabledPlugins())
-    //{
-    //   if (Plugin->CanContainContent() && (Plugin->GetName().Equals(CommandletLauncherName.ToString(), ESearchCase::IgnoreCase)))
-    //   {
-    //      PluginContentDir = Plugin->GetContentDir();
-    //      break;
-    //   }
-    //}
-
-    //if (!CommandletLauncher.IsValid())
-    //{
-    //    CommandletLauncher = MakeShared<FCommandletLauncher>();
-    //}
-
-    //CommandletLauncher->CreateNewCommandletProcess(TEXT("CommandletName"), TEXT("-CommandletArgs"));
-
     TSharedRef<FCommandletLauncherEditor> Editor = MakeShared<FCommandletLauncherEditor>();
     Editor->InitEditor(EToolkitMode::Standalone, nullptr);
 }
