@@ -100,7 +100,7 @@ void SCommandletLauncherEditorWidget::Construct(const FArguments& InArgs)
 							.Text(LOCTEXT("CommandletLauncherExecutor", "Execute"))
 							.OnClicked_Lambda([this]()
 							{
-								if (EditorPtr.IsValid() && !SelectedCommandlet->IsEmpty())
+								if (SelectedCommandlet.IsValid() && !SelectedCommandlet->IsEmpty() && SelectedArgument.IsValid() && !SelectedArgument->IsEmpty())
 								{
 									EditorPtr.Pin()->ExecuteCommandlet(*SelectedCommandlet.Get(), *SelectedArgument.Get());
 								}
