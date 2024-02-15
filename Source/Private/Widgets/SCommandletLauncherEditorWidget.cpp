@@ -13,45 +13,101 @@ void SCommandletLauncherEditorWidget::Construct(const FArguments& InArgs)
 	this->ChildSlot
 	[
 		SNew(SVerticalBox)
-		+ SVerticalBox::Slot()
-		.AutoHeight()
-		.VAlign(VAlign_Top)
-		.Padding(5.0f)
-		[
-			SNew(STextBlock)
-			.Font(FAppStyle::GetFontStyle(TEXT("SmallFont")))
-			.Text(LOCTEXT("Commandlet", "Commandlet"))
-		]
-		+SVerticalBox::Slot()
-		.AutoHeight()
-		.VAlign(VAlign_Top)
-		.Padding(5.0f)
-		[
-			SNew(SSearchableComboBox)
-			.ToolTipText(LOCTEXT("CommandletToolTip", "Select the commandlet to run."))
-			.OptionsSource(&Commandlets)
-			.OnGenerateWidget_Lambda([](TSharedPtr<FString> InItem)
-			{
-				return SNew(STextBlock).Text(FText::FromString(*InItem.Get()));
-			})
-			.OnSelectionChanged_Lambda([this](TSharedPtr<FString> InString, ESelectInfo::Type SelectInfo)
-			{
-				SelectedCommandlet = InString;						
-			})
-			[
-				SNew(STextBlock)
-				.Font(IPropertyTypeCustomizationUtils::GetRegularFont())
-				.Text_Lambda([this]()
-				{
-					if (SelectedCommandlet.IsValid())
-					{
-						return FText::FromString(*SelectedCommandlet.Get());
-					}
 
-					return FText::FromString(*Commandlets[0].Get());
-				})
-			]
-		]
+			+ SVerticalBox::Slot()
+			.AutoHeight()
+			.Padding(5.0f)
+			[
+				SNew(SHorizontalBox)
+
+					+ SHorizontalBox::Slot()
+					.AutoWidth()
+					.Padding(5.0f, 5.0f)
+					.VAlign(VAlign_Center)
+					[
+						SNew(STextBlock)
+							.Font(FAppStyle::GetFontStyle(TEXT("SmallFont")))
+							.Text(LOCTEXT("CommandletLauncherText", "-RUN="))
+					]
+
+					+ SHorizontalBox::Slot()
+					.AutoWidth()
+					.Padding(5.0f)
+					.VAlign(VAlign_Center)
+					[
+						SNew(SSearchableComboBox)
+							.ToolTipText(LOCTEXT("CommandlettLauncherToolTip", "Select the commandlet to run."))
+							.OptionsSource(&Commandlets)
+							.OnGenerateWidget_Lambda([](TSharedPtr<FString> InItem)
+							{
+								return SNew(STextBlock).Text(FText::FromString(*InItem.Get()));
+							})
+							.OnSelectionChanged_Lambda([this](TSharedPtr<FString> InString, ESelectInfo::Type SelectInfo)
+							{
+								SelectedCommandlet = InString;
+							})
+							[
+								SNew(STextBlock)
+									.Font(IPropertyTypeCustomizationUtils::GetRegularFont())
+									.Text_Lambda([this]()
+									{
+										if (SelectedCommandlet.IsValid())
+										{
+											return FText::FromString(*SelectedCommandlet.Get());
+										}
+
+										return FText::FromString(*Commandlets[0].Get());
+									})
+							]
+					]
+
+					+ SHorizontalBox::Slot()
+					.AutoWidth()
+					.Padding(5.0f)
+					[
+						SAssignNew(EditableText, SEditableTextBox)
+							.MinDesiredWidth(500)
+							.Font(FAppStyle::GetFontStyle(TEXT("SmallFont")))
+							.OnTextCommitted_Lambda([this](const FText& InNewText, ETextCommit::Type InCommitType)
+							{
+								SelectedArgument = MakeShareable(new FString(InNewText.ToString()));
+							})
+					]
+
+					+ SHorizontalBox::Slot()
+					.AutoWidth()
+					.Padding(5.0f)
+					[
+						SNew(STextComboBox)
+							.Font(FAppStyle::GetFontStyle(TEXT("SmallFont")))
+							.OptionsSource(&Arguments)
+							.OnSelectionChanged_Lambda([&](TSharedPtr<FString> InString, ESelectInfo::Type)
+							{
+								SelectedArgument = InString;
+								EditableText->SetText(FText::FromString(*SelectedArgument));
+							})
+					]
+
+					+ SHorizontalBox::Slot()
+					.AutoWidth()
+					.Padding(5.0f)
+					[
+						SNew(SButton)
+							.ButtonStyle(FAppStyle::Get(), "FlatButton")
+							.ForegroundColor(FLinearColor::White)
+							.ContentPadding(FMargin(6, 2))
+							.Text(LOCTEXT("CommandletLauncherExecutor", "Execute"))
+							.OnClicked_Lambda([this]()
+							{
+								if (EditorPtr.IsValid() && !SelectedCommandlet->IsEmpty())
+								{
+									EditorPtr.Pin()->ExecuteCommandlet(*SelectedCommandlet.Get(), *SelectedArgument.Get());
+								}
+								
+								return FReply::Handled();
+							})
+					]
+			]			
 	];
 }
 
@@ -65,6 +121,8 @@ void SCommandletLauncherEditorWidget::SetCommandlets()
 			Commandlets.Add(MakeShared<FString>(Class->GetName()));
 		}
 	}
+
+	Arguments.Add(MakeShareable(new FString(TEXT("Test-Name"))));
 }
 
 #undef LOCTEXT_NAMESPACE
