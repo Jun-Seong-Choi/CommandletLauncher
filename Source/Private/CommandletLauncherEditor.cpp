@@ -33,7 +33,7 @@ FLinearColor FCommandletLauncherEditor::GetWorldCentricTabColorScale() const
 	return FLinearColor::White;
 }
 
-void FCommandletLauncherEditor::RegisterTabSpawners(const TSharedRef<class FTabManager>& InTabManager)
+void FCommandletLauncherEditor::RegisterTabSpawners(const TSharedRef<FTabManager>& InTabManager)
 {
 	WorkspaceMenuCategory = InTabManager->AddLocalWorkspaceMenuCategory(LOCTEXT("WorkspaceMenu_CommandletLauncherEditor", "Commandlet Launcher Editor"));
 	auto WorkspaceMenuCategoryRef = WorkspaceMenuCategory.ToSharedRef();
@@ -46,14 +46,14 @@ void FCommandletLauncherEditor::RegisterTabSpawners(const TSharedRef<class FTabM
 		.SetIcon(FSlateIcon(FAppStyle::GetAppStyleSetName(), "Icons.Info"));
 }
 
-void FCommandletLauncherEditor::UnregisterTabSpawners(const TSharedRef<class FTabManager>& InTabManager)
+void FCommandletLauncherEditor::UnregisterTabSpawners(const TSharedRef<FTabManager>& InTabManager)
 {
 	FAssetEditorToolkit::UnregisterTabSpawners(InTabManager);
 
 	InTabManager->UnregisterTabSpawner(TabID);
 }
 
-void FCommandletLauncherEditor::InitEditor(const EToolkitMode::Type Mode, const TSharedPtr<class IToolkitHost>& InitToolkitHost)
+void FCommandletLauncherEditor::InitEditor(const EToolkitMode::Type Mode, const TSharedPtr<IToolkitHost>& InitToolkitHost)
 {
 	const TSharedRef<FTabManager::FLayout> StandaloneDefaultLayout = FTabManager::NewLayout("Standalone_CommandletLauncher_Layout_v1")
 		->AddArea

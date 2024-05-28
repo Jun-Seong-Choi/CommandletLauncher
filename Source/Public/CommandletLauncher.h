@@ -85,9 +85,9 @@ private:
 private:
     ECommandletLauncherStatus::Type Status = ECommandletLauncherStatus::Waiting;
 
-    TQueue<TSharedPtr<FCommandletLauncherProcess>> Commandlets;
+    TQueue<TSharedPtr<class FCommandletLauncherProcess>> Commandlets;
 
-    TSharedPtr<FCommandletLauncherProcess> ProcessingCommandlet;
+    TSharedPtr<class FCommandletLauncherProcess> ProcessingCommandlet;
 
     void* ReadPipe = nullptr;
     void* WritePipe = nullptr;

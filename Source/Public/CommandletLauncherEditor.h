@@ -19,10 +19,10 @@ public:
 	virtual FLinearColor GetWorldCentricTabColorScale() const override;
 	/** IToolkit interface */
 
-	virtual void RegisterTabSpawners(const TSharedRef<class FTabManager>& InTabManager) override;
-	virtual void UnregisterTabSpawners(const TSharedRef<class FTabManager>& InTabManager) override;
+	virtual void RegisterTabSpawners(const TSharedRef<FTabManager>& InTabManager) override;
+	virtual void UnregisterTabSpawners(const TSharedRef<FTabManager>& InTabManager) override;
 
-	void InitEditor(const EToolkitMode::Type Mode, const TSharedPtr<class IToolkitHost>& InitToolkitHost);
+	void InitEditor(const EToolkitMode::Type Mode, const TSharedPtr<IToolkitHost>& InitToolkitHost);
 	void ExecuteCommandlet(const FString& InCommandletName, const FString& InCommandletArgs);
 
 public:
@@ -34,6 +34,6 @@ private:
 	void CreateInternalWidgets();
 
 private:
-	TSharedPtr<FCommandletLauncher> CommandletLauncher = nullptr;
-	TSharedPtr<SCommandletLauncherEditorWidget> EditorWidget;
+	TSharedPtr<class FCommandletLauncher> CommandletLauncher = nullptr;
+	TSharedPtr<class SCommandletLauncherEditorWidget> EditorWidget;
 };

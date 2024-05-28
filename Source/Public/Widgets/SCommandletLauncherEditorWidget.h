@@ -1,15 +1,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "CommandletLauncherEditor.h"
 #include "Widgets/SCompoundWidget.h"
-
-class FCommandletLauncherEditor;
 
 class SCommandletLauncherEditorWidget : public SCompoundWidget
 {
 public:
 	SLATE_BEGIN_ARGS(SCommandletLauncherEditorWidget) {}
-		SLATE_ARGUMENT(TWeakPtr<FCommandletLauncherEditor>, Editor)
+		SLATE_ARGUMENT(TWeakPtr<class FCommandletLauncherEditor>, Editor)
 	SLATE_END_ARGS()
 
 	void Construct(const FArguments& InArgs);
@@ -19,7 +18,7 @@ public:
 
 private:
 
-	TWeakPtr<FCommandletLauncherEditor> EditorPtr;
+	TWeakPtr<class FCommandletLauncherEditor> EditorPtr;
 
 	TSharedPtr<SEditableTextBox> EditableText;
 

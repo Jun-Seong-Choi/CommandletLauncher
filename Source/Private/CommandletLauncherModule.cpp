@@ -50,7 +50,7 @@ void FCommandletLauncherModule::PluginButtonClicked()
 {
     // Put your "OnButtonClicked" stuff here
 
-    TSharedRef<FCommandletLauncherEditor> Editor = MakeShared<FCommandletLauncherEditor>();
+    TSharedRef<class FCommandletLauncherEditor> Editor = MakeShared<class FCommandletLauncherEditor>();
     Editor->InitEditor(EToolkitMode::Standalone, nullptr);
 }
 

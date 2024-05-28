@@ -27,7 +27,7 @@ void FCommandletLauncher::Exit()
 
 void FCommandletLauncher::CreateNewCommandletProcess(const FString& InName, const FString& InArgs)
 {
-    TSharedPtr<FCommandletLauncherProcess> NewCommandlet = MakeShared<FCommandletLauncherProcess>(InName, InArgs, ReadPipe, WritePipe, ProcessHandle, this);
+    TSharedPtr<class FCommandletLauncherProcess> NewCommandlet = MakeShared<FCommandletLauncherProcess>(InName, InArgs, ReadPipe, WritePipe, ProcessHandle, this);
     if (NewCommandlet->IsValid())
     {
         NewCommandlet->OnStarted().AddRaw(this, &FCommandletLauncher::OnCommandletStarted);
