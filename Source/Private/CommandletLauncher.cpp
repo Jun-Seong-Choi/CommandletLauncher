@@ -137,7 +137,7 @@ void FCommandletLauncher::OutputMessage(const FString& InMessage)
         const FString& ResultMessageString = TEXT("LogInit: Display:");
         if (!StringArray.IsEmpty() && !StringArray[0].Contains(ResultMessageString))
         {
-            const FString& OutMessage = FString::Format(TEXT("{0}{1}"), { Delim, StringArray[1] });
+            const FString& OutMessage = FString::Format(TEXT("{0}{1}"), { Delim, StringArray[0] });
             {
                 UE_LOG(CommandletLauncher, Log, TEXT("%s"), *OutMessage);
                 OnMessageReceived.Broadcast(OutMessage);

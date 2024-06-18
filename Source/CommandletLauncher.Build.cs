@@ -41,6 +41,7 @@ public class CommandletLauncher : ModuleRules
 				"ToolMenus",
 				"CoreUObject",
 				"Engine",
+				"Json",
 				"Slate",
 				"SlateCore",
 				"ToolWidgets"

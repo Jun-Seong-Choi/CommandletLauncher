@@ -82,7 +82,24 @@ void FCommandletLauncherEditor::ExecuteCommandlet(const FString& InCommandletNam
 		CommandletLauncher = MakeShared<FCommandletLauncher>();
 	}
 
+	if (!CommandletConfig.IsValid())
+	{
+		CommandletConfig = MakeShared<FCommandletLauncherConfig>();
+	}
+
 	CommandletLauncher->CreateNewCommandletProcess(InCommandletName, InCommandletArgs);
+
+	CommandletConfig->SaveCommandLineToConfig(InCommandletName, InCommandletArgs);
+}
+
+void FCommandletLauncherEditor::LoadCommandletArguments(const FString& InCommandletName, TArray<FString>& OutCommandletArguments)
+{
+	if (!CommandletConfig.IsValid())
+	{
+		CommandletConfig = MakeShared<FCommandletLauncherConfig>();
+	}
+
+	OutCommandletArguments = CommandletConfig->LoadCommandLineFromConfig(InCommandletName);
 }
 
 TSharedRef<SDockTab> FCommandletLauncherEditor::SpawnTab(const FSpawnTabArgs& InArgs)

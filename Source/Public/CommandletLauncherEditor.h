@@ -3,6 +3,7 @@
 #include "Framework/Docking/TabManager.h"
 #include "Widgets/SCommandletLauncherEditorWidget.h"
 #include "CommandletLauncher.h"
+#include "CommandletLauncherConfig.h"
 
 static const FName CommandletLauncherEditorTabName("CommandletLauncherEditor");
 
@@ -24,6 +25,7 @@ public:
 
 	void InitEditor(const EToolkitMode::Type Mode, const TSharedPtr<IToolkitHost>& InitToolkitHost);
 	void ExecuteCommandlet(const FString& InCommandletName, const FString& InCommandletArgs);
+	void LoadCommandletArguments(const FString& InCommandletName, TArray<FString>& OutCommandletArguments);
 
 public:
 	static const FName TabID;
@@ -35,5 +37,6 @@ private:
 
 private:
 	TSharedPtr<class FCommandletLauncher> CommandletLauncher = nullptr;
+	TSharedPtr<class FCommandletLauncherConfig> CommandletConfig = nullptr;
 	TSharedPtr<class SCommandletLauncherEditorWidget> EditorWidget;
 };

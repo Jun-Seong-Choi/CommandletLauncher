@@ -3,6 +3,7 @@
 #include "CoreMinimal.h"
 #include "CommandletLauncherEditor.h"
 #include "Widgets/SCompoundWidget.h"
+#include "Widgets/Input/STextComboBox.h"
 
 class SCommandletLauncherEditorWidget : public SCompoundWidget
 {
@@ -14,13 +15,14 @@ public:
 	void Construct(const FArguments& InArgs);
 	void SetCommandlets();
 
-	void OnCommandletCommitted(const FText& InNewText, ETextCommit::Type InCommitType);
+private:
+	void RefreshArguments(const FString& InCommandletName);
 
 private:
-
 	TWeakPtr<class FCommandletLauncherEditor> EditorPtr;
 
 	TSharedPtr<SEditableTextBox> EditableText;
+	TSharedPtr<STextComboBox> ComboBox;
 
 	TArray<TSharedPtr<FString>> Commandlets;
 	TArray<TSharedPtr<FString>> Arguments;

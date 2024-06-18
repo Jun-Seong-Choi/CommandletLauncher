@@ -46,6 +46,7 @@ void SCommandletLauncherEditorWidget::Construct(const FArguments& InArgs)
 							.OnSelectionChanged_Lambda([this](TSharedPtr<FString> InString, ESelectInfo::Type SelectInfo)
 							{
 								SelectedCommandlet = InString;
+								RefreshArguments(*SelectedCommandlet.Get());
 							})
 							[
 								SNew(STextBlock)
@@ -79,13 +80,22 @@ void SCommandletLauncherEditorWidget::Construct(const FArguments& InArgs)
 					.AutoWidth()
 					.Padding(5.0f)
 					[
-						SNew(STextComboBox)
+						SAssignNew(ComboBox, STextComboBox)
 							.Font(FAppStyle::GetFontStyle(TEXT("SmallFont")))
 							.OptionsSource(&Arguments)
 							.OnSelectionChanged_Lambda([&](TSharedPtr<FString> InString, ESelectInfo::Type)
 							{
-								SelectedArgument = InString;
-								EditableText->SetText(FText::FromString(*SelectedArgument));
+								if (!SelectedArgument.IsValid())
+								{
+									SelectedArgument = MakeShareable(new FString());
+								}
+
+								if (InString.IsValid())
+								{
+									SelectedArgument = InString;
+								}
+
+								EditableText->SetText(FText::FromString(*SelectedArgument.Get()));
 							})
 					]
 
@@ -100,16 +110,25 @@ void SCommandletLauncherEditorWidget::Construct(const FArguments& InArgs)
 							.Text(LOCTEXT("CommandletLauncherExecutor", "Execute"))
 							.OnClicked_Lambda([this]()
 							{
-								if (SelectedCommandlet.IsValid() && !SelectedCommandlet->IsEmpty() && SelectedArgument.IsValid() && !SelectedArgument->IsEmpty())
+								if (!SelectedArgument.IsValid())
+								{
+									SelectedArgument = MakeShareable(new FString());
+								}
+
+								if (SelectedCommandlet.IsValid() && !SelectedCommandlet->IsEmpty())
 								{
 									EditorPtr.Pin()->ExecuteCommandlet(*SelectedCommandlet.Get(), *SelectedArgument.Get());
+
+									RefreshArguments(*SelectedCommandlet.Get());
 								}
 								
 								return FReply::Handled();
 							})
 					]
-			]			
+			]
 	];
+
+	RefreshArguments(*SelectedCommandlet.Get());
 }
 
 void SCommandletLauncherEditorWidget::SetCommandlets()
@@ -123,7 +142,30 @@ void SCommandletLauncherEditorWidget::SetCommandlets()
 		}
 	}
 
-	Arguments.Add(MakeShareable(new FString(TEXT("Test-Name"))));
+	if (!Commandlets.IsEmpty())
+	{
+		SelectedCommandlet = Commandlets[0];
+	}
+}
+
+void SCommandletLauncherEditorWidget::RefreshArguments(const FString& InCommandletName)
+{
+	Arguments.Empty();
+
+	TArray<FString> OutCommandletArguments;
+	EditorPtr.Pin()->LoadCommandletArguments(InCommandletName, OutCommandletArguments);
+	for (const FString& Argument : OutCommandletArguments)
+	{
+		Arguments.AddUnique(MakeShareable<FString>(new FString(Argument)));
+	}
+
+	if (Arguments.IsEmpty())
+	{
+		SelectedArgument = nullptr;
+		ComboBox->SetSelectedItem(nullptr);
+	}
+
+	ComboBox->RefreshOptions();
 }
 
 #undef LOCTEXT_NAMESPACE
